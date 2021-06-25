@@ -1,7 +1,9 @@
 package com.example.flixster.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,9 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster.R;
 import com.example.flixster.adapters.MovieAdapter;
 import com.example.flixster.databinding.ActivityMainBinding;
 import com.example.flixster.models.Movie;
@@ -20,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +45,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Reduce view boilerplate with View Binding
         ActivityMainBinding mainBinding = ActivityMainBinding.inflate(getLayoutInflater()); // activity_detail.xml -> ActivityDetailBinding
         // layout activity stored in special property root
         View view = mainBinding.getRoot();
         setContentView(view);
+
+        Toolbar toolbar = (Toolbar) mainBinding.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Assign movies to an empty array (here we'll add all the movie objects)
         movies = new ArrayList<>();
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rvMovies = mainBinding.rvMovies;
         rvMovies.setAdapter(movieAdapter);
         rvMovies.setLayoutManager(new LinearLayoutManager(this)); // arranges individual elements in a one-dimensional list
+        rvMovies.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // CodePath's Http client (doc -> https://guides.codepath.org/android/Using-Codepath-Async-Http-Client)
         AsyncHttpClient client = new AsyncHttpClient(); // handles threads for asynchronous requests, catches and handls errors, onSuccess and onFailure callbacks

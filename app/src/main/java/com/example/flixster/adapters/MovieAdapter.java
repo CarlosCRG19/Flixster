@@ -64,8 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Layout views
-        TextView tvTitle;
-        TextView tvOverview;
+        TextView tvTitle, tvOverview, tvRating;
         ImageView ivPoster;
 
         public ViewHolder(@NonNull View itemView) {
@@ -74,6 +73,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            tvRating = itemView.findViewById(R.id.tvRating);
             // Add itemView's click listener (use this since the class implements View.OnClickListener)
             itemView.setOnClickListener(this);
         }
@@ -84,6 +84,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
 
+            float rating = (float) (movie.getVoteAverage() / 2);
+            tvRating.setText(String.valueOf(rating));
+
             // Load movie image depending on orientation
             boolean orientation = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT; // true if it is in portrait mode
             String imageURL =  orientation ? movie.getPosterPath() : movie.getBackdropPath(); // link to image
@@ -92,7 +95,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             // CodePath's image loader (doc -> https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library)
             Glide.with(context)
                     .load(imageURL)
-                    .transform(new RoundedCornersTransformation(50,0))
+                    .transform(new RoundedCornersTransformation(20,0))
                     .placeholder(R.drawable.placeholder)
                     .into(ivPoster);
         }

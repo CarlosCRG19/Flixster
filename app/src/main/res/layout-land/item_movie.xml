@@ -5,11 +5,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+
+
     <ImageView
         android:id="@+id/ivPoster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:adjustViewBounds="true"
         android:maxHeight="200dp"
         android:scaleType="fitCenter"
@@ -23,10 +27,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="6dp"
         android:layout_toEndOf="@+id/ivPoster"
-        tools:text="Fast and Furious" />
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        tools:text="Movie Title" />
 
     <TextView
         android:id="@+id/tvOverview"
@@ -34,9 +41,50 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="-1dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/ivPoster"
-        tools:text="Chalaalalalalalallalaa" />
+        android:fontFamily="@font/open_sans"
+        android:textSize="12sp"
+        tools:text="Overview" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rating_background"
+
+
+        android:orientation="horizontal"
+
+        android:layout_alignBottom="@id/ivPoster"
+        android:layout_alignLeft="@id/ivPoster"
+        android:paddingTop="2dp"
+        >
+
+        <RatingBar
+            android:id="@+id/rbView"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:progressTint="@color/gold"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:numStars="1"
+            android:rating="1"/>
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/bowlby_one_sc"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Rating" />
+    </LinearLayout>
 </RelativeLayout>
