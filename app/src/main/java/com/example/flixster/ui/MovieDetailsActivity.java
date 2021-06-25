@@ -1,6 +1,7 @@
 package com.example.flixster.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
 
+import java.util.Objects;
+
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieDetailsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,6 +34,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
     Movie movie;
 
     // Layout views
+    Button btnPlay;
     RatingBar rbVoteAverage;
     TextView tvTitle, tvOverview;
     ImageView ivPoster, ivBackground;
@@ -44,12 +49,17 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         View view = detailsBinding.getRoot();
         setContentView(view);
 
+        Toolbar toolbar = (Toolbar) detailsBinding.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         // Assign View objects
         tvTitle = detailsBinding.tvTitle;
         tvOverview = detailsBinding.tvOverview;
         rbVoteAverage = detailsBinding.rbVoteAverage;
         ivPoster = detailsBinding.ivPoster;
         ivBackground = detailsBinding.ivBackground;
+        btnPlay = detailsBinding.btnPlay;
 
         // Use parceler to unwrap the movie passed by the intent (with simple name as identifier)
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
@@ -73,7 +83,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
                 .placeholder(R.drawable.placeholder)
                 .into(ivBackground);
 
-        ivBackground.setOnClickListener(this);
+        if(Objects.isNull(movie.getVideoId())){
+            btnPlay.setVisibility(View.INVISIBLE);
+        } else {
+            btnPlay.setOnClickListener(this);
+        }
 
     }
 
@@ -82,7 +96,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         // Create intent to display MovieDetailsActivity
         Intent i = new Intent(this, MovieTrailerActivity.class); // NOTE: Intents are messaging objects that are used to request action from another app component.
         // Wrap the movie and pass it using simple name as identifier
-        i.putExtra("Extra", movie.getVideoId());
+        i.putExtra("VideoId", movie.getVideoId());
         // Show the activity
         this.startActivity(i);
     }

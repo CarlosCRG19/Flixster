@@ -29,6 +29,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
 
+        android:background="@color/white"
         android:divider="@color/dark_gray"
         android:dividerHeight="10dp" />
 

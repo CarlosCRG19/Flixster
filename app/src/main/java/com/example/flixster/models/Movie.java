@@ -5,6 +5,7 @@ import android.util.Log;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixster.R;
+import com.google.android.youtube.player.internal.e;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,14 +90,20 @@ public class Movie {
                     // results array contains the info for all the movies
                     JSONArray results = jsonObject.getJSONArray("results");
                     // Use fromJsonArray function to create array of Movie objects
-                    videoId = results.getJSONObject(0).getString("key");
+                    for (int j=0; j<results.length(); j++) {
+                        JSONObject video = results.getJSONObject(j);
+                        if(video.getString("site").equals("YouTube")){
+                            videoId = video.getString("key");
+                            break;
+                        }
+                    }
                 } catch (JSONException e) {
                    Log.i("YTVIDEOS", "Hit json exception", e);
                 }
             }
 
             @Override
-            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+            public void onFailure(int i, Headers headers, String s, Throwable e) {
                 Log.i("YTVIDEOS", "Failed to do request:" + getURL);
             }
         });

@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gold">#FFD700</color>
     <color name="dark_gray">#555555</color>
-    <color name="red">#F8445C</color>
+    <color name="red">#FF3333</color>
+    <color name="secondary_red">#F8445C</color>
 </resources>
