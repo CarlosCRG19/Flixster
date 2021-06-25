@@ -1,13 +1,14 @@
-package com.example.flixster;
+package com.example.flixster.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -18,6 +19,7 @@ import com.example.flixster.models.Movie;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.i(TAG, "Hit json exception", e);
                 }
-
             }
 
             @Override
