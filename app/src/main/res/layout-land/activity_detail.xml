@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar" android:layout_height="wrap_content" android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bowlby_one_sc"
+            android:text="FLIXSTER" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/toolbar"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:transitionName="movie_image"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-1dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignBottom="@+id/ivBackground"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/gradient_background" />
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBackground"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-64dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="200dp"
+        android:scaleType="fitCenter"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-1dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rbVoteAverage"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:layout_toEndOf="@+id/ivPoster"
+        android:fontFamily="@font/open_sans"
+        android:textSize="12sp"
+        android:transitionName="overview"
+        tools:text="Overview" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBackground"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivPoster"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:transitionName="title"
+        tools:text="Movie Title" />
+
+    <RatingBar
+        android:id="@+id/rbVoteAverage"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/ivPoster"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressTint="@color/gold"
+        android:secondaryProgressTint="@android:color/transparent"
+        android:stepSize="0.5"
+        android:transitionName="rating_bar" />
+
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/play_button"
+        android:alpha="0.8"/>
+
+</RelativeLayout>
