@@ -32,9 +32,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='walkthrough.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
-<img src='walkthrough_land.gif' title='Video Walkthrough in Landscape mode' width='600px' alt='Video Walkthrough Landscape mode' />
-<img src='placeholders.png' title='Placeholder' width='300px' alt='Placeholders' />
+<img src='walkthrough.gif' title='Video Walkthrough' width='360px' alt='Video Walkthrough' />
+<img src='walkthrough_land.gif' title='Video Walkthrough in Landscape mode' width='720px' alt='Video Walkthrough Landscape mode' />
+<img src='placeholders.png' title='Placeholder' width='360px' alt='Placeholders' />
 
 GIF created with [Kap](https://getkap.co/).
 
