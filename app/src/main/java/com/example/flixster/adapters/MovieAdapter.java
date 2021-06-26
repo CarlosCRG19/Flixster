@@ -99,7 +99,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
             // CodePath's image loader (doc -> https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library)
             Glide.with(context)
-                    .load(imageURL)
+                    .load("")
                     .transform(new RoundedCornersTransformation(20,0)) // This sets rounded corners
                     .placeholder(R.drawable.placeholder) // placeholder image until it charges
                     .into(ivPoster);
