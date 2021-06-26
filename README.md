@@ -35,7 +35,7 @@ Here's a walkthrough of implemented user stories:
 ### Portrait Mode
 <img src='walkthrough.gif' title='Video Walkthrough' width='360px' alt='Video Walkthrough' />
 
-### Landcape Mode
+### Landscape Mode
 <img src='walkthrough_land.gif' title='Video Walkthrough in Landscape mode' width='720px' alt='Video Walkthrough Landscape mode' />
 
 ### Placeholders
