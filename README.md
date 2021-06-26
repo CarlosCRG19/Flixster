@@ -32,8 +32,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
+### Portrait Mode
 <img src='walkthrough.gif' title='Video Walkthrough' width='360px' alt='Video Walkthrough' />
+### Landcape Mode
 <img src='walkthrough_land.gif' title='Video Walkthrough in Landscape mode' width='720px' alt='Video Walkthrough Landscape mode' />
+### Placeholders
 <img src='placeholders.png' title='Placeholder' width='360px' alt='Placeholders' />
 
 GIF created with [Kap](https://getkap.co/).
