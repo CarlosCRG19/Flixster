@@ -9,6 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+// Activity for playing a YT Video
 public class MovieTrailerActivity extends YouTubeBaseActivity {
 
 
@@ -17,13 +18,14 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_trailer);
 
+        // Get videoId from Intent (NOTE: this activity can only be started if there is a video)
         final String videoId = getIntent().getStringExtra("VideoId");
 
-        // resolve the player view from the layout
+        // Resolve the player view from the layout
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
 
-        // initialize with API key stored in secrets.xml
-        playerView.initialize(getString(R.string.ytAPI), new YouTubePlayer.OnInitializedListener() {
+        // Initialize with API key stored in secrets.xml
+        playerView.initialize(getString(R.string.YT_KEY), new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                 YouTubePlayer youTubePlayer, boolean b) {

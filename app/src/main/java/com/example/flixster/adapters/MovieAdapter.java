@@ -88,6 +88,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
 
+            // Calculate rating dividing by 2 and set that value to the rating text
             float rating = (float) (movie.getVoteAverage() / 2);
             tvRating.setText(String.valueOf(rating));
 
@@ -99,8 +100,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             // CodePath's image loader (doc -> https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library)
             Glide.with(context)
                     .load(imageURL)
-                    .transform(new RoundedCornersTransformation(20,0))
-                    .placeholder(R.drawable.placeholder)
+                    .transform(new RoundedCornersTransformation(20,0)) // This sets rounded corners
+                    .placeholder(R.drawable.placeholder) // placeholder image until it charges
                     .into(ivPoster);
         }
 
@@ -117,13 +118,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 Intent i = new Intent(context, MovieDetailsActivity.class); // NOTE: Intents are messaging objects that are used to request action from another app component.
                 // Wrap the movie and pass it using simple name as identifier
                 i.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
-                // Create transition
+
+                // Set View Pairs to pass to transition
                 Pair<View, String> p1 = Pair.create( tvTitle, "title");
                 Pair<View, String> p2 = Pair.create(tvOverview, "overview");
                 Pair<View, String> p3 = Pair.create(ivPoster, "movie_image");
                 Pair<View, String> p4 = Pair.create(rbView, "rating_bar");
+                //Create a transtition
                 ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation((Activity) context, p1, p2, p3);
+                        makeSceneTransitionAnimation((Activity) context, p1, p2, p3, p4); // this animation makes it seem like every view is just changing place between activities. Without precisely disappearing when you change between them
                 // Show the activity
                 context.startActivity(i, options.toBundle());
             }

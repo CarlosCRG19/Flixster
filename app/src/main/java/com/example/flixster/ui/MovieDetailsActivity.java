@@ -2,12 +2,8 @@ package com.example.flixster.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +13,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster.R;
 import com.example.flixster.databinding.ActivityDetailBinding;
 import com.example.flixster.models.Movie;
@@ -33,12 +28,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
     // Movie object to assign the movie to display
     Movie movie;
 
-    // Layout views
-    Button btnPlay;
-    RatingBar rbVoteAverage;
-    TextView tvTitle, tvOverview;
-    ImageView ivPoster, ivBackground;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,53 +38,47 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         View view = detailsBinding.getRoot();
         setContentView(view);
 
+        // Set new Toolbar
         Toolbar toolbar = (Toolbar) detailsBinding.toolbar;
         setSupportActionBar(toolbar);
+        // Don't display title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // Assign View objects
-        tvTitle = detailsBinding.tvTitle;
-        tvOverview = detailsBinding.tvOverview;
-        rbVoteAverage = detailsBinding.rbVoteAverage;
-        ivPoster = detailsBinding.ivPoster;
-        ivBackground = detailsBinding.ivBackground;
-        btnPlay = detailsBinding.btnPlay;
 
         // Use parceler to unwrap the movie passed by the intent (with simple name as identifier)
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d("MovieDetailsActivity", String.format("Showing details for '%s'", movie.getTitle())); // log message in case of success
 
         // Change the text on the TextViews
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
+        detailsBinding.tvTitle.setText(movie.getTitle());
+        detailsBinding.tvOverview.setText(movie.getOverview());
         // Change RatingBar value (rating scale is from 0 to 10, so we need to divide by 2)
-        rbVoteAverage.setRating((float) (movie.getVoteAverage() / 2));
+        detailsBinding.rbVoteAverage.setRating((float) (movie.getVoteAverage() / 2));
 
         // CodePath's image loader (doc -> https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library)
         Glide.with(this)
                 .load(movie.getPosterPath())
-                .transform(new RoundedCornersTransformation(50,0))
+                .transform(new RoundedCornersTransformation(30,0))
                 .placeholder(R.drawable.placeholder)
-                .into(ivPoster);
+                .into(detailsBinding.ivPoster);
 
         Glide.with(this)
                 .load(movie.getBackdropPath())
                 .placeholder(R.drawable.placeholder)
-                .into(ivBackground);
+                .into(detailsBinding.ivBackground);
 
+        // If there is a movie video from YouTube, display a button to start the MovieTrailerActivity
         if(Objects.isNull(movie.getVideoId())){
-            btnPlay.setVisibility(View.INVISIBLE);
+            detailsBinding.btnPlay.setVisibility(View.INVISIBLE); // if there is no video, the button won't appear
         } else {
-            btnPlay.setOnClickListener(this);
+            detailsBinding.btnPlay.setOnClickListener(this);
         }
-
     }
 
     @Override
     public void onClick(View v) {
-        // Create intent to display MovieDetailsActivity
-        Intent i = new Intent(this, MovieTrailerActivity.class); // NOTE: Intents are messaging objects that are used to request action from another app component.
-        // Wrap the movie and pass it using simple name as identifier
+        // Create intent to display MovieTrailerActivity
+        Intent i = new Intent(this, MovieTrailerActivity.class);
+        // Pass videoId to make the request with the YT API
         i.putExtra("VideoId", movie.getVideoId());
         // Show the activity
         this.startActivity(i);
